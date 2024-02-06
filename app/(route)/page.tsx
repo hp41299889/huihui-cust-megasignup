@@ -1,7 +1,9 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  redirect("/home");
   return (
     <main className={styles.main}>
       <div className={styles.description}>

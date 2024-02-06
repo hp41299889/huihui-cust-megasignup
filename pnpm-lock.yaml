@@ -15,20 +15,20 @@ dependencies:
     specifier: ^5.15.5
     version: 5.15.5(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
-    specifier: 5.8.1
+    specifier: '5.8'
     version: 5.8.1(prisma@5.8.1)
   next:
     specifier: 14.1.0
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
-  prisma:
-    specifier: ^5.8.1
-    version: 5.8.1
   react:
     specifier: ^18
     version: 18.2.0
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
+  react-hook-form:
+    specifier: ^7.50.0
+    version: 7.50.0(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -46,6 +46,9 @@ devDependencies:
   eslint-config-next:
     specifier: 14.1.0
     version: 14.1.0(eslint@8.56.0)(typescript@5.3.3)
+  prisma:
+    specifier: '5.8'
+    version: 5.8.1
   typescript:
     specifier: ^5
     version: 5.3.3
@@ -618,11 +621,9 @@ packages:
 
   /@prisma/debug@5.8.1:
     resolution: {integrity: sha512-tjuw7eA0Us3T42jx9AmAgL58rzwzpFGYc3R7Y4Ip75EBYrKMBA1YihuWMcBC92ILmjlQ/u3p8VxcIE0hr+fZfg==}
-    dev: false
 
   /@prisma/engines-version@5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2:
     resolution: {integrity: sha512-f5C3JM3l9yhGr3cr4FMqWloFaSCpNpMi58Om22rjD2DOz3owci2mFdFXMgnAGazFPKrCbbEhcxdsRfspEYRoFQ==}
-    dev: false
 
   /@prisma/engines@5.8.1:
     resolution: {integrity: sha512-TJgYLRrZr56uhqcXO4GmP5be+zjCIHtLDK20Cnfg+o9d905hsN065QOL+3Z0zQAy6YD31Ol4u2kzSfRmbJv/uA==}
@@ -632,7 +633,6 @@ packages:
       '@prisma/engines-version': 5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2
       '@prisma/fetch-engine': 5.8.1
       '@prisma/get-platform': 5.8.1
-    dev: false
 
   /@prisma/fetch-engine@5.8.1:
     resolution: {integrity: sha512-+bgjjoSFa6uYEbAPlklfoVSStOEfcpheOjoBoNsNNSQdSzcwE2nM4Q0prun0+P8/0sCHo18JZ9xqa8gObvgOUw==}
@@ -640,13 +640,11 @@ packages:
       '@prisma/debug': 5.8.1
       '@prisma/engines-version': 5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2
       '@prisma/get-platform': 5.8.1
-    dev: false
 
   /@prisma/get-platform@5.8.1:
     resolution: {integrity: sha512-wnA+6HTFcY+tkykMokix9GiAkaauPC5W/gg0O5JB0J8tCTNWrqpnQ7AsaGRfkYUbeOIioh6woDjQrGTTRf1Zag==}
     dependencies:
       '@prisma/debug': 5.8.1
-    dev: false
 
   /@rushstack/eslint-patch@1.7.0:
     resolution: {integrity: sha512-Jh4t/593gxs0lJZ/z3NnasKlplXT2f+4y/LZYuaKZW5KAaiVFL/fThhs+17EbUd53jUVJ0QudYCBGbN/psvaqg==}
@@ -2388,7 +2386,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.8.1
-    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -2414,6 +2411,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form@7.50.0(react@18.2.0):
+    resolution: {integrity: sha512-AOhuzM3RdP09ZCnq+Z0yvKGHK25yiOX5phwxjV9L7U6HMla10ezkBnvQ+Pk4GTuDfsC5P2zza3k8mawFwFLVuQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:
