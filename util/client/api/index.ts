@@ -37,3 +37,11 @@ export const deleteSignup = async (id: number) => {
     throw console.error(error);
   }
 };
+
+export const getCheckinSignup = async (phone: string) => {
+  try {
+    return await nextApi.get<Response<Signup>>(`/checkin/signup/${phone}`);
+  } catch (error) {
+    throw console.error(error);
+  }
+};

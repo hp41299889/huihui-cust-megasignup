@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Signup = () => {
+  // TODO feedback
   const [signupSelected, setSignupSelected] = useState<number>(2);
   const {
     register,
