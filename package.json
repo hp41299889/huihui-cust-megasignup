@@ -14,10 +14,12 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.5",
     "@prisma/client": "5.8",
+    "axios": "^1.6.7",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.50.0"
+    "react-hook-form": "^7.50.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,114 +1,154 @@
 "use client";
+import { postSignup } from "@/util/client/api";
 import {
   Box,
   Button,
   FormControl,
-  Grid,
+  Unstable_Grid2 as Grid,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
 import { Prisma } from "@prisma/client";
-import { Controller, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
+  const [signupSelected, setSignupSelected] = useState<number>(2);
   const {
-    control,
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Prisma.SignupCreateInput>();
-  console.log(errors);
 
   const onSubmit = async (payload: Prisma.SignupCreateInput) => {
-    console.log(payload);
-    console.log(errors);
+    try {
+      const res = await postSignup(payload);
+      console.log(res);
+    } catch (error) {}
   };
+
+  useEffect(() => {
+    if (signupSelected !== -1) {
+      setValue("signupNumbers", Number(signupSelected));
+    } else {
+      setValue("signupNumbers", 5);
+    }
+  }, [signupSelected]);
 
   return (
     <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container>
-        <Grid item lg={12}>
+      <Grid container rowSpacing={"1rem"} columnSpacing={{ lg: "4rem" }}>
+        <Grid lg={6}>
           <TextField
-            {...register("name", {
-              required: { value: true, message: "請輸入姓名" },
-            })}
             fullWidth
             label={"姓名"}
             variant="standard"
+            {...register("name", {
+              required: { value: true, message: "請輸入姓名" },
+            })}
             error={Boolean(errors.name)}
-            // helperText={errors.name.}
+            helperText={errors.name?.message}
           />
         </Grid>
-        <Grid item lg={12}>
+        {/* <Grid item lg={6}>
           <TextField
-            {...register("childName", { required: true })}
             fullWidth
             label={"幼童姓名"}
             variant="standard"
+            {...register("childName", {
+              required: { value: true, message: "請輸入幼童姓名" },
+            })}
             error={Boolean(errors.childName)}
-            helperText={errors.childName && "請輸入幼童姓名"}
+            helperText={errors.childName?.message}
           />
-        </Grid>
-        <Grid item lg={12}>
+        </Grid> */}
+        <Grid lg={6}>
           <TextField
-            {...register("phone", { required: true })}
             fullWidth
             label={"手機"}
             variant="standard"
             FormHelperTextProps={{
               sx: { color: "red" },
             }}
-            error={Boolean(errors.name)}
+            {...register("phone", {
+              required: { value: true, message: "請輸入手機" },
+            })}
+            error={Boolean(errors.phone)}
             helperText={
               errors.phone
-                ? "請輸入手機\n該手機號碼為活動日報到之依據，請務必再次確認"
+                ? errors.phone.message +
+                  "\n該手機號碼為活動日報到之依據，請務必再次確認"
                 : "該手機號碼為活動日報到之依據，請務必再次確認"
             }
           />
         </Grid>
-        <Grid item lg={12}>
+        <Grid lg={8}>
           <TextField
-            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
             fullWidth
             label={"Email"}
             variant="standard"
-            helperText="稍後發送報名完成之郵件，請輸入正確且完整"
+            {...register("email", {
+              required: { value: true, message: "請輸入Email" },
+              pattern: { value: /^\S+@\S+$/i, message: "請輸入正確格式" },
+            })}
+            error={Boolean(errors.email)}
+            helperText={
+              errors.email
+                ? errors.email.message +
+                  "\n稍後發送報名完成之郵件，請輸入正確且完整"
+                : "稍後發送報名完成之郵件，請輸入正確且完整"
+            }
           />
         </Grid>
-        <Grid item lg={12}>
+        <Grid lg={8}>
           <TextField
-            {...register("introducer")}
             fullWidth
             label={"介紹人or園所"}
             variant="standard"
+            {...register("introducer")}
             helperText="ex. 「皮蛋老師」或「何嘉仁xx分校」"
           />
         </Grid>
-        <Grid item lg={12}>
+        <Grid lg={4} />
+        <Grid lg={4}>
           <FormControl variant="standard" sx={{ minWidth: 160 }}>
             <InputLabel>報名人數</InputLabel>
-            <Controller
-              name="signupNumbers"
-              control={control}
-              defaultValue={2}
-              rules={{ required: true }}
-              render={({ field }) => {
-                return (
-                  <Select {...field}>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={0}>其他</MenuItem>
-                  </Select>
-                );
-              }}
-            />
+            <Select
+              value={signupSelected}
+              onChange={(e) => setSignupSelected(Number(e.target.value))}
+            >
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={-1}>其他</MenuItem>
+            </Select>
           </FormControl>
         </Grid>
+        {signupSelected === -1 && (
+          <Grid lg={4}>
+            <TextField
+              fullWidth
+              label={"自訂報名人數"}
+              variant="standard"
+              type="number"
+              {...register("signupNumbers", {
+                required: { value: true, message: "請輸入自訂報名人數" },
+                valueAsNumber: true,
+              })}
+              error={Boolean(errors.signupNumbers)}
+              helperText={errors.signupNumbers?.message}
+            />
+          </Grid>
+        )}
+        <Grid lg={2} lgOffset={10}>
+          <Button type="submit" variant="contained">
+            送出
+          </Button>
+        </Grid>
       </Grid>
-      <Button type="submit">s</Button>
     </Box>
   );
 };

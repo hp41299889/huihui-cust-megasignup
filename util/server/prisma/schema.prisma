@@ -15,9 +15,9 @@ model Signup {
   name          String
   phone         String  @unique
   email         String
-  childName     String
+  // childName     String
   introducer    String
   signupNumbers Int
-  isVerify      Boolean
-  isCheckin     Boolean
+  isVerify      Boolean @default(false)
+  isCheckin     Boolean @default(false)
 }

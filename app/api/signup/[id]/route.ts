@@ -2,19 +2,24 @@ import { NextRequest } from "next/server";
 import { Prisma } from "@prisma/client";
 
 import { apiResponse, response } from "@/util/server/api";
-import { createSignup, readSignup } from "@/util/server/prisma/model/signup";
+import { deleteSignup, updateSignup } from "@/util/server/prisma/model/signup";
 
-export const GET = async () => {
+export const PATCH = async (
+  req: NextRequest,
+  { params }: { params: { id: number } }
+) => {
   const r = { ...response };
+  const { id } = params;
+  const payload: Prisma.SignupUpdateInput = await req.json();
   try {
-    const signups = await readSignup();
+    const signup = await updateSignup(id, payload);
     r.status = {
       type: "success",
       code: 200,
     };
     r.resbonse = {
       message: "OK",
-      data: signups,
+      data: signup,
     };
   } catch (error) {
     r.status = {
@@ -29,14 +34,17 @@ export const GET = async () => {
   return apiResponse(r);
 };
 
-export const POST = async (req: NextRequest) => {
+export const DELETE = async (
+  _: NextRequest,
+  { params }: { params: { id: number } }
+) => {
   const r = { ...response };
-  const payload: Prisma.SignupCreateInput = await req.json();
+  const { id } = params;
   try {
-    const signup = await createSignup(payload);
+    const signup = await deleteSignup(id);
     r.status = {
       type: "success",
-      code: 201,
+      code: 200,
     };
     r.resbonse = {
       message: "OK",

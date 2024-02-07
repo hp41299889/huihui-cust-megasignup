@@ -12,7 +12,7 @@ interface ApiResponse<T> {
   data: T;
 }
 
-interface Response<T> {
+export interface Response<T> {
   status: ApiStatus;
   resbonse: ApiResponse<T>;
 }
