@@ -35,7 +35,9 @@ export const POST = async (req: NextRequest) => {
   const payload: Prisma.SignupCreateInput = await req.json();
   try {
     const signup = await createSignup(payload);
-    await sendMail(payload.email);
+    const s = await sendMail(payload.email);
+    console.log(s);
+
     r.status = {
       type: "success",
       code: 201,

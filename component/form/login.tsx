@@ -56,6 +56,7 @@ const LoginForm = () => {
             fullWidth
             label="密碼"
             variant="standard"
+            type="password"
             {...register("password", {
               required: { value: true, message: "請輸入密碼" },
             })}
