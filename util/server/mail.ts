@@ -23,7 +23,7 @@ export const sendMail = async (email: string) => {
     `,
   };
   try {
-    transporter.sendMail(mailOptions);
+    return transporter.sendMail(mailOptions);
   } catch (error) {
     console.error(error);
   }

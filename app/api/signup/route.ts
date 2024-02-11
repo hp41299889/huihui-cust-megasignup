@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
     };
     r.resbonse = {
       message: "OK",
-      data: signup,
+      data: s,
     };
   } catch (error) {
     r.status = {
