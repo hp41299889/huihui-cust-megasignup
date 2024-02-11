@@ -4,11 +4,9 @@ import SignupForm from "@/component/form/signup";
 
 const Page = () => {
   return (
-    <>
-      <Box paddingTop={"4rem"} paddingInline={"20rem"}>
-        <SignupForm />
-      </Box>
-    </>
+    <Box paddingTop={"4rem"} paddingInline={"4rem"}>
+      <SignupForm />
+    </Box>
   );
 };
 

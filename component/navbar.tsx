@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const buttonStyle: SxProps = { fontSize: 24 };
+const buttonStyle: SxProps = { fontSize: 20 };
 
 const Navbar = () => {
   return (
