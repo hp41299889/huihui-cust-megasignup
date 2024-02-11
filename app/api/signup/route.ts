@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 
 import { apiResponse, response } from "@/util/server/api";
 import { createSignup, readSignup } from "@/util/server/prisma/model/signup";
+import { sendMail } from "@/util/server/mail";
 
 export const GET = async () => {
   const r = { ...response };
@@ -34,6 +35,7 @@ export const POST = async (req: NextRequest) => {
   const payload: Prisma.SignupCreateInput = await req.json();
   try {
     const signup = await createSignup(payload);
+    await sendMail(payload.email);
     r.status = {
       type: "success",
       code: 201,

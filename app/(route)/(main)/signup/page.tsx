@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 
-import Signup from "@/component/signup";
+import SignupForm from "@/component/form/signup";
 
 const Page = () => {
   return (
     <>
       <Box paddingTop={"4rem"} paddingInline={"20rem"}>
-        <Signup />
+        <SignupForm />
       </Box>
     </>
   );

@@ -1,5 +1,4 @@
 "use client";
-import { postSignup } from "@/util/client/api";
 import {
   Box,
   Button,
@@ -14,21 +13,34 @@ import { Prisma } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const Signup = () => {
-  // TODO feedback
+import { postSignup } from "@/util/client/api";
+import { useAlert } from "@/util/client/hook/useAlert";
+import AlertFeedback from "../feedback/alert";
+
+const SignupForm = () => {
+  const [alertOpen, alertMsg, alertType, alert, setAlertType, onCloseAlert] =
+    useAlert();
   const [signupSelected, setSignupSelected] = useState<number>(2);
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<Prisma.SignupCreateInput>();
 
   const onSubmit = async (payload: Prisma.SignupCreateInput) => {
     try {
       const res = await postSignup(payload);
-      console.log(res);
-    } catch (error) {}
+      if (res.data.status.type === "success") {
+        setAlertType("success");
+        alert("報名成功，請確認Email以完成驗證");
+        reset();
+      }
+    } catch (error) {
+      setAlertType("error");
+      alert("got error");
+    }
   };
 
   useEffect(() => {
@@ -41,6 +53,12 @@ const Signup = () => {
 
   return (
     <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
+      <AlertFeedback
+        open={alertOpen}
+        message={alertMsg}
+        type={alertType}
+        onClose={onCloseAlert}
+      />
       <Grid container rowSpacing={"1rem"} columnSpacing={{ lg: "4rem" }}>
         <Grid lg={6}>
           <TextField
@@ -154,4 +172,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupForm;

@@ -29,7 +29,7 @@ export const response: Response<any> = {
 };
 
 export const apiResponse = <T>(r: Response<T>) => {
-  return NextResponse.json(r.resbonse.data, { status: r.status.code });
+  return NextResponse.json(r, { status: r.status.code });
 };
 
 export const apiErrorHandler = <T>(r: Response<T>, e: any) => {

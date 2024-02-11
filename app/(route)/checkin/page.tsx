@@ -1,22 +1,31 @@
 "use client";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import Checkin from "@/component/checkin";
+import CheckinForm from "@/component/form/checkin";
+import { Signup } from "@prisma/client";
+import VerifyForm from "@/component/form/verify";
 
 const Page = () => {
-  const [step, setStep] = useState<"checkin" | "verify">("checkin");
+  const [verifyOpen, setVerifyOpen] = useState<boolean>(false);
+  const [signup, setSignup] = useState<Signup>();
 
   return (
-    <Dialog open>
-      <DialogTitle>
-        {step === "checkin" && "報到"}
-        {step === "verify" && "驗證"}
-      </DialogTitle>
-      <DialogContent>
-        {step === "checkin" && <Checkin />}
-        {step === "verify" && <></>}
-      </DialogContent>
-    </Dialog>
+    <>
+      <Dialog open>
+        <DialogTitle>報到查詢</DialogTitle>
+        <DialogContent>
+          <CheckinForm setVerifyOpen={setVerifyOpen} setSignup={setSignup} />
+        </DialogContent>
+      </Dialog>
+      <Dialog open={verifyOpen}>
+        <DialogTitle>報到確認</DialogTitle>
+        <DialogContent>
+          {signup && (
+            <VerifyForm signup={signup} setVerifyOpen={setVerifyOpen} />
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

@@ -1,23 +1,28 @@
 import { NextRequest } from "next/server";
 
 import { apiResponse, response } from "@/util/server/api";
-import { updateSignup } from "@/util/server/prisma/model/signup";
+import { login } from "@/util/server/auth";
 
-export const PATCH = async (
-  _: NextRequest,
-  { params }: { params: { id: number } }
-) => {
+export interface PostLogin {
+  username: string;
+  password: string;
+}
+
+export const POST = async (req: NextRequest) => {
   const r = { ...response };
-  const { id } = params;
+  const payload: PostLogin = await req.json();
   try {
-    const signup = await updateSignup(Number(id), { isVerify: true });
+    const auth = await login(payload.username, payload.password);
+    if (!auth) {
+      throw "auth failed";
+    }
     r.status = {
       type: "success",
       code: 200,
     };
     r.resbonse = {
       message: "OK",
-      data: signup,
+      data: "login success",
     };
   } catch (error) {
     r.status = {

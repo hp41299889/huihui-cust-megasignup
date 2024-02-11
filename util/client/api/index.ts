@@ -2,6 +2,7 @@ import { Prisma, Signup } from "@prisma/client";
 
 import { nextApi } from "./request";
 import { Response } from "@/util/server/api";
+import { PostLogin } from "@/app/api/auth/login/route";
 
 export const postSignup = async (payload: Prisma.SignupCreateInput) => {
   try {
@@ -41,6 +42,22 @@ export const deleteSignup = async (id: number) => {
 export const getCheckinSignup = async (phone: string) => {
   try {
     return await nextApi.get<Response<Signup>>(`/checkin/signup/${phone}`);
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
+export const patchVerifySignup = async (id: number) => {
+  try {
+    return await nextApi.patch<Response<Signup>>(`/checkin/verify/${id}`);
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
+export const postLogin = async (payload: PostLogin) => {
+  try {
+    return await nextApi.post<Response<any>>("/auth/login", payload);
   } catch (error) {
     throw console.error(error);
   }
