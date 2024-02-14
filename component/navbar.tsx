@@ -33,7 +33,7 @@ const Navbar = () => {
               <Button sx={buttonStyle}>前往報名</Button>
             </Link>
             <Link href={"/info"}>
-              <Button sx={buttonStyle}>相關資訊</Button>
+              <Button sx={buttonStyle}>客服(匯款資訊)</Button>
             </Link>
           </Box>
           <Link href={"/admin/login"}>

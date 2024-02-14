@@ -5,12 +5,10 @@ import Navbar from "@/component/navbar";
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <Paper>
-      <Box height={"100vh"} sx={{ backgroundColor: "white" }}>
-        <Navbar />
-        <Box height={"100%"}>{children}</Box>
-      </Box>
-    </Paper>
+    <Box height={"100vh"} width={"100vw"} sx={{ backgroundColor: "white" }}>
+      <Navbar />
+      <Box height={"100%"}>{children}</Box>
+    </Box>
   );
 };
 

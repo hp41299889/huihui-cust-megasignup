@@ -114,7 +114,7 @@ const SignupForm = () => {
             }
           />
         </Grid>
-        <Grid xs={12} lg={8}>
+        <Grid xs={12} lg={12}>
           <TextField
             fullWidth
             label={"介紹人or園所"}
@@ -123,9 +123,9 @@ const SignupForm = () => {
             helperText="ex. 「皮蛋老師」或「何嘉仁xx分校」"
           />
         </Grid>
-        {/* <Grid xs={0} lg={4} /> */}
-        <Grid xs={5} lg={4}>
-          <FormControl variant="standard" sx={{ minWidth: 160 }}>
+        {/* <Grid lg={4} /> */}
+        <Grid xs={5} lg={5}>
+          <FormControl variant="standard" sx={{ minWidth: 160, maxWidth: 600 }}>
             <InputLabel>報名人數</InputLabel>
             <Select
               value={signupSelected}
@@ -139,7 +139,7 @@ const SignupForm = () => {
           </FormControl>
         </Grid>
         {signupSelected === -1 && (
-          <Grid xs={5} lg={4} xsOffset={2}>
+          <Grid xs={5} lg={5} xsOffset={2}>
             <TextField
               fullWidth
               label={"自訂報名人數"}
@@ -154,7 +154,7 @@ const SignupForm = () => {
             />
           </Grid>
         )}
-        <Grid xs={2} lg={2} xsOffset={4} lgOffset={10}>
+        <Grid xs={4} xsOffset={4} lg={2} lgOffset={10}>
           <Button type="submit" variant="contained">
             送出
           </Button>

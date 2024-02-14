@@ -39,7 +39,7 @@ const LoginForm = () => {
         onClose={onCloseAlert}
       />
       <Grid container rowSpacing={"1rem"}>
-        <Grid lg={12}>
+        <Grid xs={12} lg={12}>
           <TextField
             fullWidth
             label="帳號"
@@ -51,7 +51,7 @@ const LoginForm = () => {
             helperText={errors.username?.message}
           />
         </Grid>
-        <Grid lg={12}>
+        <Grid xs={12} lg={12}>
           <TextField
             fullWidth
             label="密碼"
@@ -64,7 +64,7 @@ const LoginForm = () => {
             helperText={errors.password?.message}
           />
         </Grid>
-        <Grid lg={2} lgOffset={10}>
+        <Grid xsOffset={5} lg={2} lgOffset={10}>
           <Button type="submit" variant="contained">
             登入
           </Button>

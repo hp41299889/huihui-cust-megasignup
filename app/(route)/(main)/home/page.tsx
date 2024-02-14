@@ -1,5 +1,5 @@
 import { Box, Unstable_Grid2 as Grid } from "@mui/material";
-import Image from "next/image";
+import { Image } from "antd";
 
 const Page = () => {
   return (
@@ -9,32 +9,33 @@ const Page = () => {
         display={"flex"}
         justifyContent={"space-between"}
         columnGap={4}
+        rowGap={4}
       >
-        <Grid lg>
-          <Image src={"/image/flow.jpg"} alt="flow" width={450} height={700} />
+        <Grid xs={12} lg>
+          <Image src={"/image/flow.png"} alt="flow" width={400} height={650} />
         </Grid>
-        <Grid lg>
+        <Grid xs={12} lg>
           <Image
-            src={"/image/introduce.jpg"}
+            src={"/image/introduce.png"}
             alt="introduce"
-            width={450}
-            height={700}
+            width={400}
+            height={650}
           />
         </Grid>
-        <Grid lg>
+        <Grid xs={12} lg>
           <Image
-            src={"/image/welcome.jpg"}
+            src={"/image/welcome.png"}
             alt="welcome"
-            width={450}
-            height={700}
+            width={400}
+            height={650}
           />
         </Grid>
-        <Grid lg>
+        <Grid xs={12} lg>
           <Image
-            src={"/image/precautions.jpg"}
+            src={"/image/precautions.png"}
             alt="precautions"
-            width={450}
-            height={700}
+            width={400}
+            height={650}
           />
         </Grid>
       </Grid>
