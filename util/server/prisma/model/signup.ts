@@ -15,7 +15,11 @@ export const createSignup = async (p: Prisma.SignupCreateInput) => {
 
 export const readSignup = async () => {
   try {
-    return await signup.findMany();
+    return await signup.findMany({
+      orderBy: {
+        id: "asc",
+      },
+    });
   } catch (error) {
     throw errorHandler("read signup failed", error);
   }

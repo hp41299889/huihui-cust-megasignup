@@ -10,7 +10,7 @@ export const PATCH = async (
   const r = { ...response };
   const { id } = params;
   try {
-    const signup = await updateSignup(Number(id), { isVerify: true });
+    const signup = await updateSignup(Number(id), { isCheckin: true });
     r.status = {
       type: "success",
       code: 200,

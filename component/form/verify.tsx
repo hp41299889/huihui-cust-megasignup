@@ -19,6 +19,8 @@ const VerifyForm = (props: Props) => {
     useAlert();
   const { name, phone, signupNumbers } = signup;
 
+  const isCheckin = signup.isCheckin;
+
   const onCancel = () => setVerifyOpen(false);
 
   const onSubmit = async () => {
@@ -43,24 +45,39 @@ const VerifyForm = (props: Props) => {
         type={alertType}
         onClose={onCloseAlert}
       />
-      <Box>
-        <Typography>姓名： {name}</Typography>
-        <Typography>電話號碼： {phone}</Typography>
-        <Typography>報名人數： {signupNumbers}</Typography>
-        <Box paddingTop={"1.5rem"}>
-          <Grid container>
-            <Grid lg lgOffset={1.5}>
-              <Button variant="contained" onClick={onCancel}>
-                取消
-              </Button>
+      <Box width={300}>
+        {isCheckin ? (
+          <>
+            <Typography> 此資料已完成報到，請重新輸入</Typography>
+            <Grid container>
+              <Grid lgOffset={10}>
+                <Button variant="contained" onClick={onCancel}>
+                  確認
+                </Button>
+              </Grid>
             </Grid>
-            <Grid lg>
-              <Button variant="contained" onClick={onSubmit}>
-                確認
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
+          </>
+        ) : (
+          <>
+            <Typography>姓名： {name}</Typography>
+            <Typography>電話號碼： {phone}</Typography>
+            <Typography>報名人數： {signupNumbers}</Typography>
+            <Box paddingTop={"1.5rem"}>
+              <Grid container>
+                <Grid lg lgOffset={1.5}>
+                  <Button variant="contained" onClick={onCancel}>
+                    取消
+                  </Button>
+                </Grid>
+                <Grid lg>
+                  <Button variant="contained" onClick={onSubmit}>
+                    確認
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </>
+        )}
       </Box>
     </Box>
   );

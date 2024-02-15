@@ -36,15 +36,13 @@ export const POST = async (req: NextRequest) => {
   try {
     const signup = await createSignup(payload);
     const s = await sendMail(payload.email);
-    console.log(s);
-
     r.status = {
       type: "success",
       code: 201,
     };
     r.resbonse = {
       message: "OK",
-      data: s,
+      data: signup,
     };
   } catch (error) {
     r.status = {
