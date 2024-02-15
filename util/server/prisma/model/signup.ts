@@ -33,6 +33,14 @@ export const readSignupByPhone = async (phone: string) => {
   }
 };
 
+export const readSignupCount = async () => {
+  try {
+    return await signup.count();
+  } catch (error) {
+    throw errorHandler("read signup failed", error);
+  }
+};
+
 export const updateSignup = async (id: number, p: Prisma.SignupUpdateInput) => {
   try {
     return await signup.update({ where: { id }, data: p });

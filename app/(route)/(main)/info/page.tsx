@@ -28,13 +28,12 @@ const Page = () => {
         </Grid>
         <Grid lg={6}>
           <Typography variant="h5">匯款帳號：</Typography>
-          <Typography variant="h6">
-            泡泡龍創意活動工作室－兆豐國際商業銀行 國外部017
-          </Typography>
-          <Typography>007-09-08201-6</Typography>
+          <Image src={"/image/bank.png"} alt="bank" width={600} height={400} />
           <Typography color={"red"}>
             匯款時請備註報名資料的姓名or回傳帳號末5碼至Line客服，以利查帳作業。
           </Typography>
+          <Typography variant="h6">帳號：</Typography>
+          <Typography>007-09-08201-6</Typography>
         </Grid>
       </Grid>
       {/* <Button ref={accountRef} type="link" onClick={onClickAccount}>

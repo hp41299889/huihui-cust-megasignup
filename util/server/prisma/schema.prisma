@@ -21,3 +21,8 @@ model Signup {
   isVerify      Boolean @default(false)
   isCheckin     Boolean @default(false)
 }
+
+model Setting {
+  field String @id
+  value String
+}

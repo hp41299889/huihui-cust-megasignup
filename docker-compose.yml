@@ -5,6 +5,7 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+    restart: always
     environment:
       POSTGRES_USER: huihui
       POSTGRES_PASSWORD: huihui
@@ -13,6 +14,7 @@ services:
       - ./data/postgres:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4
+    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: huihui@hui.com
       PGADMIN_DEFAULT_PASSWORD: huihui

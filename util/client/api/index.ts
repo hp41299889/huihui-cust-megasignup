@@ -1,4 +1,4 @@
-import { Prisma, Signup } from "@prisma/client";
+import { Prisma, Setting, Signup } from "@prisma/client";
 
 import { nextApi } from "./request";
 import { Response } from "@/util/server/api";
@@ -58,6 +58,33 @@ export const patchVerifySignup = async (id: number) => {
 export const postLogin = async (payload: PostLogin) => {
   try {
     return await nextApi.post<Response<any>>("/auth/login", payload);
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
+export const getSignupLimit = async () => {
+  try {
+    return await nextApi.get<Response<Setting>>("/setting/signupLimit");
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
+export const patchSignupLimit = async (payload: Prisma.SettingUpdateInput) => {
+  try {
+    return await nextApi.patch<Response<Setting>>(
+      "/setting/signupLimit",
+      payload
+    );
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
+export const getSignupCount = async () => {
+  try {
+    return await nextApi.get<Response<number>>("/signup/count");
   } catch (error) {
     throw console.error(error);
   }
