@@ -12,7 +12,12 @@ const Page = () => {
         rowGap={4}
       >
         <Grid xs={12} lg>
-          <Image src={"/image/flow.png"} alt="flow" width={400} height={650} />
+          <Image
+            src={"/image/welcome.png"}
+            alt="welcome"
+            width={400}
+            height={650}
+          />
         </Grid>
         <Grid xs={12} lg>
           <Image
@@ -24,19 +29,14 @@ const Page = () => {
         </Grid>
         <Grid xs={12} lg>
           <Image
-            src={"/image/welcome.png"}
-            alt="welcome"
-            width={400}
-            height={650}
-          />
-        </Grid>
-        <Grid xs={12} lg>
-          <Image
             src={"/image/precautions.png"}
             alt="precautions"
             width={400}
             height={650}
           />
+        </Grid>
+        <Grid xs={12} lg>
+          <Image src={"/image/flow.png"} alt="flow" width={400} height={650} />
         </Grid>
       </Grid>
     </Box>

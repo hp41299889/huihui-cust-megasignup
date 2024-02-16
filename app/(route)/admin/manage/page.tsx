@@ -5,7 +5,7 @@ import { utils, writeFileXLSX } from "xlsx";
 import { getSignup } from "@/util/client/api";
 import { useFetchData } from "@/util/client/hook/useFetchData";
 import SignupTable from "@/component/table/signup";
-import SignupLimitForm from "@/component/form/signupLimit";
+import SettingForm from "@/component/form/setting";
 
 const Page = () => {
   const [signups, mutateSignups] = useFetchData("signup", getSignup);
@@ -36,7 +36,7 @@ const Page = () => {
           <Button variant="contained" onClick={exportExcel}>
             匯出excel
           </Button>
-          <SignupLimitForm />
+          <SettingForm />
         </Box>
       </Box>
       {signups && <SignupTable signups={signups} />}

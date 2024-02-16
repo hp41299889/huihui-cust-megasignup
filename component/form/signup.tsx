@@ -8,12 +8,18 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Prisma } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { getSignupCount, getSignupLimit, postSignup } from "@/util/client/api";
+import {
+  getSetting,
+  getSignupCount,
+  getSignupLimit,
+  postSignup,
+} from "@/util/client/api";
 import { useAlert } from "@/util/client/hook/useAlert";
 import AlertFeedback from "../feedback/alert";
 import { useFetchData } from "@/util/client/hook/useFetchData";
@@ -24,10 +30,7 @@ const SignupForm = () => {
     "signupCount",
     getSignupCount
   );
-  const [signupLimitField, mutateSignupLimitField] = useFetchData(
-    "signupLimit",
-    getSignupLimit
-  );
+  const [setting, mutateSetting] = useFetchData("setting", getSetting);
   const [alertOpen, alertMsg, alertType, alert, setAlertType, onCloseAlert] =
     useAlert();
   const [signupSelected, setSignupSelected] = useState<number>(2);
@@ -39,6 +42,13 @@ const SignupForm = () => {
     formState: { errors },
   } = useForm<Prisma.SignupCreateInput>();
   const router = useRouter();
+
+  const signupLimit = Number(
+    setting?.find((s) => s.field === "signupLimit")?.value
+  );
+  const signupDeadline = setting?.find(
+    (s) => s.field === "signupDeadline"
+  )?.value;
 
   const onSubmit = async (payload: Prisma.SignupCreateInput) => {
     try {
@@ -63,14 +73,13 @@ const SignupForm = () => {
   }, [signupSelected]);
 
   useEffect(() => {
-    const signupLimit = Number(signupLimitField?.value);
     if (signupLimit && signupCount && signupLimit <= signupCount) {
       setAlertType("warning");
       alert("報名人數已達上限！");
       const redirect = () => router.push("/home");
       setTimeout(redirect, 3000);
     }
-  }, [signupCount, signupLimitField]);
+  }, [signupCount, setting]);
 
   return (
     <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
@@ -173,6 +182,11 @@ const SignupForm = () => {
               error={Boolean(errors.signupNumbers)}
               helperText={errors.signupNumbers?.message}
             />
+          </Grid>
+        )}
+        {signupLimit && signupCount && (
+          <Grid xs={12} lg={12}>
+            <Typography>剩餘名額：{signupLimit - signupCount}</Typography>
           </Grid>
         )}
         <Grid xs={4} xsOffset={4} lg={2} lgOffset={10}>

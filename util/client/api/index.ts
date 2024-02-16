@@ -71,12 +71,28 @@ export const getSignupLimit = async () => {
   }
 };
 
+export const getSetting = async () => {
+  try {
+    return await nextApi.get<Response<Setting[]>>("/setting");
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
 export const patchSignupLimit = async (payload: Prisma.SettingUpdateInput) => {
   try {
     return await nextApi.patch<Response<Setting>>(
       "/setting/signupLimit",
       payload
     );
+  } catch (error) {
+    throw console.error(error);
+  }
+};
+
+export const patchSettings = async (payload: Prisma.SettingUpdateInput[]) => {
+  try {
+    return await nextApi.patch<Response<Setting[]>>("/setting", payload);
   } catch (error) {
     throw console.error(error);
   }

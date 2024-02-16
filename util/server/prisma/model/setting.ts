@@ -4,6 +4,14 @@ import { errorHandler } from "../../error";
 
 const { setting } = prisma;
 
+export const readSetting = async () => {
+  try {
+    return await setting.findMany();
+  } catch (error) {
+    throw errorHandler("read setting failed", error);
+  }
+};
+
 export const readSettingByField = async (field: string) => {
   try {
     return await setting.findFirst({ where: { field } });
