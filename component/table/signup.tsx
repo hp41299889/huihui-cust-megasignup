@@ -25,6 +25,8 @@ interface Props {
 const SignupTable = (props: Props) => {
   const { signups } = props;
 
+  const onChangeFilter = () => {};
+
   return (
     <Box>
       <DataGrid

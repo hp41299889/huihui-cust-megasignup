@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:local:push": "dotenv -e .env.local prisma db push"
+    "db:local:push": "dotenv -e .env.local prisma db push",
+    "db:production:push": "dotenv -e .env.production.local prisma db push"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.0",
@@ -23,7 +24,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.0",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20",
