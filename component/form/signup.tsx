@@ -73,6 +73,8 @@ const SignupForm = () => {
   }, [signupSelected]);
 
   useEffect(() => {
+    console.log(signupCount);
+
     if (signupLimit && signupCount && signupLimit <= signupCount) {
       setAlertType("warning");
       alert("報名人數已達上限！");

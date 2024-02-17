@@ -35,7 +35,8 @@ export const readSignupByPhone = async (phone: string) => {
 
 export const readSignupCount = async () => {
   try {
-    return await signup.count();
+    return (await signup.aggregate({ _sum: { signupNumbers: true } }))._sum
+      .signupNumbers;
   } catch (error) {
     throw errorHandler("read signup failed", error);
   }
