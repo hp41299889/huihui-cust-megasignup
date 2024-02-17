@@ -29,11 +29,17 @@ const CheckinForm = (props: Props) => {
       const res = await getCheckinSignup(phone);
       if (res.data.status.type === "success") {
         const { data } = res.data.resbonse;
-        setAlertType("success");
-        alert("查詢成功，請再次確認訊息以完成報到");
-        setSignup(data);
-        setVerifyOpen(true);
-        reset();
+        if (!data) {
+          setAlertType("error");
+          alert("查詢失敗，查無此資料");
+          reset();
+        } else {
+          setAlertType("success");
+          alert("查詢成功，請再次確認訊息以完成報到");
+          setSignup(data);
+          setVerifyOpen(true);
+          reset();
+        }
       }
     } catch (error) {
       setAlertType("error");
