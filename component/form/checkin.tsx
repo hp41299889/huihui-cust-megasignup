@@ -56,7 +56,7 @@ const CheckinForm = (props: Props) => {
         onClose={onCloseAlert}
       />
       <Grid container rowSpacing={"1rem"}>
-        <Grid lg={12}>
+        <Grid xs={12} lg={12}>
           <TextField
             fullWidth
             label="電話號碼"
@@ -68,7 +68,7 @@ const CheckinForm = (props: Props) => {
             helperText={errors.phone?.message}
           />
         </Grid>
-        <Grid lg={2} lgOffset={10}>
+        <Grid xs={2} xsOffset={4} lg={2} lgOffset={4.5}>
           <Button type="submit" variant="contained">
             報到
           </Button>

@@ -1,45 +1,28 @@
 "use client";
-import { Box, Button } from "@mui/material";
-import { utils, writeFileXLSX } from "xlsx";
+import { Box, Unstable_Grid2 as Grid } from "@mui/material";
 
 import { getSignup } from "@/util/client/api";
 import { useFetchData } from "@/util/client/hook/useFetchData";
 import SignupTable from "@/component/table/signup";
 import SettingForm from "@/component/form/setting";
+import ExportExcelButton from "@/component/button/exportExcel";
 
 const Page = () => {
   const [signups, mutateSignups] = useFetchData("signup", getSignup);
 
-  const exportExcel = () => {
-    const data = signups?.map((s) => ({
-      ID: s.id,
-      姓名: s.name,
-      電話號碼: s.phone,
-      Email: s.email,
-      報名人數: s.signupNumbers,
-      介紹人or園所: s.introducer,
-      是否報到: s.isCheckin,
-    }));
-    if (data) {
-      const ws = utils.json_to_sheet(data);
-      const wb = utils.book_new();
-      utils.book_append_sheet(wb, ws, "報名紀錄");
-      writeFileXLSX(wb, "報名紀錄.xlsx");
-    }
-  };
-
   return (
     <Box>
-      <Box display={"flex"} justifyContent={"space-between"} paddingBlock={2}>
-        <Box>search bar</Box>
-        <Box display={"flex"} paddingInline={"2rem"}>
-          <Button variant="contained" onClick={exportExcel}>
-            匯出excel
-          </Button>
+      <Grid container spacing={1}>
+        <Grid xs={4} lg={1}>
+          <ExportExcelButton signups={signups ?? []} />
+        </Grid>
+        <Grid xs={12} lg={4} lgOffset={7}>
           <SettingForm />
-        </Box>
-      </Box>
-      {signups && <SignupTable signups={signups} />}
+        </Grid>
+      </Grid>
+      {signups && (
+        <SignupTable signups={signups} mutateSignups={mutateSignups} />
+      )}
     </Box>
   );
 };

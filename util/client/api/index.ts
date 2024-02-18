@@ -105,3 +105,11 @@ export const getSignupCount = async () => {
     throw console.error(error);
   }
 };
+
+export const deleteSignups = async (ids: number[]) => {
+  try {
+    return await nextApi.delete<Response<Signup>>("/signup", { data: { ids } });
+  } catch (error) {
+    throw console.error(error);
+  }
+};

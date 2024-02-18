@@ -57,3 +57,11 @@ export const deleteSignup = async (id: number) => {
     throw errorHandler("delete signup failed", error);
   }
 };
+
+export const deleteSignups = async (ids: number[]) => {
+  try {
+    return await signup.deleteMany({ where: { id: { in: ids } } });
+  } catch (error) {
+    throw errorHandler("delete signup failed", error);
+  }
+};

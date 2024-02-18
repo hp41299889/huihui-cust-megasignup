@@ -1,4 +1,10 @@
-import { Box, Button, InputLabel, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputLabel,
+  TextField,
+  Unstable_Grid2 as Grid,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Prisma } from "@prisma/client";
 import { useEffect } from "react";
@@ -58,19 +64,21 @@ const SettingForm = () => {
         type={alertType}
         onClose={onCloseAlert}
       />
-      <Box display={"flex"} paddingInline={2}>
-        <Box>
+      <Grid container spacing={1}>
+        <Grid xs={12} lg={5}>
           <InputLabel>報名截止日</InputLabel>
-          <TextField {...register("0.value")} variant="standard" />
-        </Box>
-        <Box>
+          <TextField fullWidth {...register("0.value")} variant="standard" />
+        </Grid>
+        <Grid xs={12} lg={5}>
           <InputLabel>報名人數上限</InputLabel>
-          <TextField {...register("1.value")} variant="standard" />
-        </Box>
-        <Button type="submit" variant="contained">
-          儲存
-        </Button>
-      </Box>
+          <TextField fullWidth {...register("1.value")} variant="standard" />
+        </Grid>
+        <Grid xsOffset={4.5} lg={2} lgOffset={0}>
+          <Button type="submit" variant="contained">
+            儲存
+          </Button>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

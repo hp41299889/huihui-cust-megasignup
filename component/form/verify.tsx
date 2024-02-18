@@ -48,9 +48,9 @@ const VerifyForm = (props: Props) => {
       <Box width={300}>
         {isCheckin ? (
           <>
-            <Typography> 此資料已完成報到，請重新輸入</Typography>
+            <Typography> 此資料已完成報到，請重新輸入。</Typography>
             <Grid container>
-              <Grid lgOffset={10}>
+              <Grid xsOffset={4} lgOffset={4}>
                 <Button variant="contained" onClick={onCancel}>
                   確認
                 </Button>
@@ -62,14 +62,17 @@ const VerifyForm = (props: Props) => {
             <Typography>姓名： {name}</Typography>
             <Typography>電話號碼： {phone}</Typography>
             <Typography>報名人數： {signupNumbers}</Typography>
+            <Typography color={"red"} variant="h5">
+              請將報到確認交由工作人員操作！
+            </Typography>
             <Box paddingTop={"1.5rem"}>
               <Grid container>
-                <Grid lg lgOffset={1.5}>
+                <Grid xs={2} xsOffset={2} lg={2} lgOffset={2}>
                   <Button variant="contained" onClick={onCancel}>
                     取消
                   </Button>
                 </Grid>
-                <Grid lg>
+                <Grid xs={2} xsOffset={2} lg={2} lgOffset={4}>
                   <Button variant="contained" onClick={onSubmit}>
                     確認
                   </Button>
