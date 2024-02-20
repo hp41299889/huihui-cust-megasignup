@@ -65,6 +65,11 @@ const SignupForm = () => {
   };
 
   useEffect(() => {
+    mutateSetting();
+    mutateSignupCount();
+  }, []);
+
+  useEffect(() => {
     if (signupSelected !== -1) {
       setValue("signupNumbers", Number(signupSelected));
     } else {
