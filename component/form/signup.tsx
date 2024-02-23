@@ -24,6 +24,8 @@ import { useAlert } from "@/util/client/hook/useAlert";
 import AlertFeedback from "../feedback/alert";
 import { useFetchData } from "@/util/client/hook/useFetchData";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import dayjs from "dayjs";
 
 const SignupForm = () => {
   const [signupCount, mutateSignupCount] = useFetchData(
@@ -60,7 +62,9 @@ const SignupForm = () => {
       }
     } catch (error) {
       setAlertType("error");
-      alert("got error");
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.resbonse.message);
+      }
     }
   };
 
@@ -68,6 +72,16 @@ const SignupForm = () => {
     mutateSetting();
     mutateSignupCount();
   }, []);
+
+  useEffect(() => {
+    const expire = dayjs().isAfter(dayjs(signupDeadline));
+    if (expire) {
+      setAlertType("warning");
+      alert("報名已截止");
+      const redirect = () => router.push("/home");
+      setTimeout(redirect, 3000);
+    }
+  }, [signupDeadline]);
 
   useEffect(() => {
     if (signupSelected !== -1) {
@@ -189,11 +203,11 @@ const SignupForm = () => {
             />
           </Grid>
         )}
-        {signupLimit && signupCount && (
+        {/* {signupLimit && signupCount && (
           <Grid xs={12} lg={12}>
             <Typography>剩餘名額：{signupLimit - signupCount}</Typography>
           </Grid>
-        )}
+        )} */}
         <Grid xs={4} xsOffset={4} lg={2} lgOffset={10}>
           <Button type="submit" variant="contained">
             送出

@@ -8,7 +8,7 @@ export const postSignup = async (payload: Prisma.SignupCreateInput) => {
   try {
     return await nextApi.post<Response<Signup>>("/signup", payload);
   } catch (error) {
-    throw console.error(error);
+    throw error;
   }
 };
 

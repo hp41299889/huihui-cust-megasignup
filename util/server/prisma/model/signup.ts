@@ -9,6 +9,11 @@ export const createSignup = async (p: Prisma.SignupCreateInput) => {
   try {
     return await signup.create({ data: p });
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        throw errorHandler("該電話號碼已報名，請以其他電話號碼嘗試", error);
+      }
+    }
     throw errorHandler("create signup failed", error);
   }
 };
