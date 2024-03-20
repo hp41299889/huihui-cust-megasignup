@@ -36,6 +36,7 @@ const SignupForm = () => {
   const [alertOpen, alertMsg, alertType, alert, setAlertType, onCloseAlert] =
     useAlert();
   const [signupSelected, setSignupSelected] = useState<number>(2);
+  const [canSignup, setCanSignup] = useState<boolean>(true);
   const {
     register,
     handleSubmit,
@@ -76,6 +77,7 @@ const SignupForm = () => {
   useEffect(() => {
     const expire = dayjs().isAfter(dayjs(signupDeadline));
     if (expire) {
+      setCanSignup(false);
       setAlertType("warning");
       alert("報名已截止");
       const redirect = () => router.push("/home");
@@ -92,12 +94,13 @@ const SignupForm = () => {
   }, [signupSelected]);
 
   useEffect(() => {
-    if (signupLimit && signupCount && signupLimit <= signupCount) {
-      setAlertType("warning");
-      alert("報名人數已達上限！");
-      const redirect = () => router.push("/home");
-      setTimeout(redirect, 3000);
-    }
+    // if (signupLimit && signupCount && signupLimit <= signupCount) {
+    setCanSignup(false);
+    setAlertType("warning");
+    alert("報名人數已達上限！");
+    const redirect = () => router.push("/home");
+    setTimeout(redirect, 3000);
+    // }
   }, [signupCount, setting]);
 
   return (
@@ -209,7 +212,7 @@ const SignupForm = () => {
           </Grid>
         )} */}
         <Grid xs={4} xsOffset={4} lg={2} lgOffset={10}>
-          <Button type="submit" variant="contained">
+          <Button disabled={!canSignup} type="submit" variant="contained">
             送出
           </Button>
         </Grid>
