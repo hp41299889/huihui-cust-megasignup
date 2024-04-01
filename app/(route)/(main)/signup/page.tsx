@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import dayjs from "dayjs";
 
 import SignupForm from "@/component/form/signup";
-import { getSetting } from "@/util/client/api";
+import { getSetting, getSignupCount } from "@/util/client/api";
 import { useFetchData } from "@/util/client/hook/useFetchData";
 import { useRouter } from "next/navigation";
 import { useAlert } from "@/util/client/hook/useAlert";
@@ -12,6 +12,10 @@ import AlertFeedback from "@/component/feedback/alert";
 
 const Page = () => {
   const [setting, mutateSetting] = useFetchData("setting", getSetting);
+  const [signupCount, mutateSignupCount] = useFetchData(
+    "signupCount",
+    getSignupCount
+  );
   const [alertOpen, alertMsg, alertType, alert, setAlertType, onCloseAlert] =
     useAlert();
   const router = useRouter();
@@ -31,6 +35,16 @@ const Page = () => {
       }
     }
   }, [setting]);
+
+  
+  useEffect(() => {
+    // if (signupLimit && signupCount && signupLimit <= signupCount) {
+    setAlertType("warning");
+    alert("報名人數已達上限！");
+    const redirect = () => router.push("/home");
+    setTimeout(redirect, 3000);
+    // }
+  }, [signupCount, setting]);
 
   return (
     <Box paddingTop={"4rem"} paddingInline={"4rem"}>

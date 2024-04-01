@@ -28,10 +28,6 @@ import { AxiosError } from "axios";
 import dayjs from "dayjs";
 
 const SignupForm = () => {
-  const [signupCount, mutateSignupCount] = useFetchData(
-    "signupCount",
-    getSignupCount
-  );
   const [setting, mutateSetting] = useFetchData("setting", getSetting);
   const [alertOpen, alertMsg, alertType, alert, setAlertType, onCloseAlert] =
     useAlert();
@@ -71,7 +67,6 @@ const SignupForm = () => {
 
   useEffect(() => {
     mutateSetting();
-    mutateSignupCount();
   }, []);
 
   useEffect(() => {
@@ -92,16 +87,6 @@ const SignupForm = () => {
       setValue("signupNumbers", 5);
     }
   }, [signupSelected]);
-
-  useEffect(() => {
-    // if (signupLimit && signupCount && signupLimit <= signupCount) {
-    setCanSignup(false);
-    setAlertType("warning");
-    alert("報名人數已達上限！");
-    const redirect = () => router.push("/home");
-    setTimeout(redirect, 3000);
-    // }
-  }, [signupCount, setting]);
 
   return (
     <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
